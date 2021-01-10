@@ -7,6 +7,7 @@ import Image from "@theme/IdealImage";
 import Link from "@docusaurus/Link";
 
 import screenshot from "@site/static/img/pages/dark/panel-screenshot.png";
+import ThemedImage from '@theme/ThemedImage';
 import styles from "./styles.module.scss";
 
 function Hero() {
@@ -43,7 +44,15 @@ function Hero() {
         </div>
       </div>
 
-      <Image img={screenshot} className={clsx("shadow-md", styles.image)} />
+      {/* <Image img={screenshot} className={clsx("shadow-md", styles.image)} /> */}
+
+      <ThemedImage
+  alt="Docusaurus themed image"
+  sources={{
+    light: useBaseUrl('static/img/pages/light/panel-screenshot.png'),
+    dark: useBaseUrl('static/img/pages/dark/panel-screenshot.png'),
+  }}
+/>;
     </header>
   );
 }

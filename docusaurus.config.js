@@ -112,7 +112,10 @@ module.exports = {
       indexName: "swizzin",
     },
   },
-  plugins: ["docusaurus-plugin-sass", "@docusaurus/plugin-ideal-image"],
+  plugins: [
+    "docusaurus-plugin-sass", 
+    "@docusaurus/plugin-ideal-image",
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
