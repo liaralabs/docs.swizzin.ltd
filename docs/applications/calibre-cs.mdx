@@ -1,0 +1,65 @@
+---
+id: calibre-cs
+title: Calibre Content Server
+sidebar_label: Calibre Content Server
+---
+
+Calibre content server is a WebUI for [Calibre](calibre.mdx)
+
+## Initial Setup
+
+Installing calibre is easy. Simply issue the following command from SSH:
+
+```bash main
+sudo box install calibre
+```
+
+This command will configure and install calibre on your system. A calibre library will be created under `~/Calibre Library` for your master user
+
+
+## Access
+
+After installation, Calibre content server will be accessible on `<domain>/calibre-cs`, or `<domain>:8089`.
+
+**Please note**: The content server is running on port **`8089`**, make sure to change that from the default wherever you are trying to connect to it.
+When Calibre content server is running behind nginx, that port will not be accessible from the outside. When that's the case, please make sure to use port `443` and with SSL enabled.
+
+
+## Service Management
+
+The service file is located in the following location:
+
+
+
+```bash
+/etc/systemd/system/calibre-cs.service
+```
+
+import SystemdTabs from '../snippets/systemdtabs.mdx';
+
+<SystemdTabs service="calibre-cs"/>
+
+### Options
+import InstallOptsWarning from '../snippets/installoptswarning.md';
+
+<InstallOptsWarning />
+
+- `CALIBRE_LIBRARY_USER`:
+  - Default: The name of the master user
+  - Adds the dedicated calibre-web user to the group of this user
+  - Used to infer possible calibre library path if not specified (see below)
+  - Calibre-web's admin password will be set to the value of this user's password
+
+- `CALIBRE_LIBRARY_PATH`:
+   - Default
+      - If exists, then: `/home/$CALIBRE_LIBRARY_USER/Calibre Library`
+      - Otherwise unset, which will skip the library setup and password change procedure
+   - Used to set up the calibre-web basic setup
+
+## User management
+Calibre-cs is set up as a multi-user application, however that is _not_ achieved through calibre-content server's built in user authentication module. All `box` managed users will have access to this.
+
+## Configuration
+
+### Specifying library path
+Please edit `/etc/systemd/system/calibre-cs.service`, at the end of the line beginning with `ExecStart=` you should add the path. Make sure that the calibre-cs user 
