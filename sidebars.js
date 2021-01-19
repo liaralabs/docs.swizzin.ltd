@@ -72,6 +72,8 @@ module.exports = {
                 label: "Media Servers",
                 collapsed: true,
                 items: [
+                    "applications/calibre",
+                    "applications/calibre-cs",
                     "applications/calibre-web",
                     "applications/emby",
                     "applications/jellyfin",
