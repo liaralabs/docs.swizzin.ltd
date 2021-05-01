@@ -1,7 +1,7 @@
 ---
 id: calibre-web
-title: Calibre-Web
-sidebar_label: Calibre-Web
+title: Calibre Web
+sidebar_label: Calibre Web
 ---
 
 Calibre-web is a graphical web frontend for a Calibre Library with many very useful features, such as user management, on-the-fly conversion, Send-to-Kindle and Kobo Sync API.
@@ -11,12 +11,12 @@ Calibre-web is a graphical web frontend for a Calibre Library with many very use
 Installing Calibre-web is easy. Simply issue the following command from SSH:
 
 ```bash main
-sudo box install calibre-web
+sudo box install calibreweb
 ```
 
 This command will configure and install Calibre-web.
 
-You will then be able to access it through either `http://domain.tld/calibre` or `http://domain.tld:8083`, depending on whether or not you have nginx installed.
+You will then be able to access it through either `http://domain.tld/calibreweb` or `http://domain.tld:8083`, depending on whether or not you have nginx installed.
 
 ### Options
 
@@ -53,14 +53,14 @@ import InstallOptsWarning from '../snippets/installoptswarning.md';
 2. _*_ Change the password of the admin user 
    - _* Note: swizzin should do this for you during install in most cases. You should be told in the output if you need to do this_
    - Log in to calibre using `admin`:`admin123`
-   - Go to `http://<domain>/calibre/me` and change the password there.
+   - Go to `http://<domain>/calibreweb/me` and change the password there.
       - You might need to fill in an email address for this action to work
 4. Change the name of the admin user
    - Log in to calibre using `admin`:`<your password>`
-   - Go to `http://<domain>/calibre/me` and change the details there
+   - Go to `http://<domain>/calibreweb/me` and change the details there
       - You might need to fill in an email address for this action to work
 3. Link or install necessary binaries
-   - Go to `https://<domain>/calibre-web/admin/config` and open the "External binaries" section at the bottom
+   - Go to `https://<domain>/calibreweb/admin/config` and open the "External binaries" section at the bottom
    - Calibre e-book converter should be in **either** of these paths
       - `/usr/bin/ebook-convert` (if installed via apt)
       - `/opt/calibre/ebook-convert` (if installed through calibre installer)
@@ -83,14 +83,14 @@ Calibre-web runs as its own single process with its own system user.
 The systemd service for calibre-web resides here:
 
 ```bash
-/etc/systemd/system/calibre-web.service
+/etc/systemd/system/calibreweb.service
 ```
 
 You can use the following commands to manage the service.
 
 import SystemdTabs from '../snippets/systemdtabs.mdx';
 
-<SystemdTabs service="calibre-web"/>
+<SystemdTabs service="calibreweb"/>
 
 
 ## Troubleshooting
@@ -102,6 +102,6 @@ import Troubleshooting from '../snippets/troubleshooting.md';
 Please make sure to consult the [issues](https://github.com/janeczku/calibre-web/issues) of Calibre-web and the [expansive wiki of the project](https://github.com/janeczku/calibre-web/wiki). 
 
 ### Verbose output
-Calibre-web stores its logs in `/opt/calibre-web/calibre-web.log` and optionally `/opt/calibre-web/access.log`.
+Calibre-web stores its logs in `/opt/calibreweb/calibre-web.log` and optionally `/opt/calibreweb/access.log`.
 
 You can increase the verbosity of the log level by going to `http://domain.tld/calibre/admin/config`, opening the "Logfile Configuration" section and changing the level there.
