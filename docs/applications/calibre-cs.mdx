@@ -19,7 +19,7 @@ This command will configure and install calibre on your system. A calibre librar
 
 ## Access
 
-After installation, Calibre content server will be accessible on `<domain>/calibre-cs`, or `<domain>:8089`.
+After installation, Calibre content server will be accessible on `<domain>/calibrecs`, or `<domain>:8089`.
 
 **Please note**: The content server is running on port **`8089`**, make sure to change that from the default wherever you are trying to connect to it.
 When Calibre content server is running behind nginx, that port will not be accessible from the outside. When that's the case, please make sure to use port `443` and with SSL enabled.
@@ -32,12 +32,12 @@ The service file is located in the following location:
 
 
 ```bash
-/etc/systemd/system/calibre-cs.service
+/etc/systemd/system/calibrecs.service
 ```
 
 import SystemdTabs from '../snippets/systemdtabs.mdx';
 
-<SystemdTabs service="calibre-cs"/>
+<SystemdTabs service="calibrecs"/>
 
 ### Options
 import InstallOptsWarning from '../snippets/installoptswarning.md';
@@ -62,4 +62,4 @@ Calibre-cs is set up as a multi-user application, however that is _not_ achieved
 ## Configuration
 
 ### Specifying library path
-Please edit `/etc/systemd/system/calibre-cs.service`, at the end of the line beginning with `ExecStart=` you should add the path. Make sure that the calibre-cs user 
+Please edit `/etc/systemd/system/calibrecs.service`, at the end of the line beginning with `ExecStart=` you should add the path.
