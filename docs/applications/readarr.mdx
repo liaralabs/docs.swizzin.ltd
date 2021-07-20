@@ -1,0 +1,96 @@
+---
+id: readarr
+title: Readarr
+sidebar_label: Readarr
+---
+
+Readarr is an ebook (and maybe eventually magazine/audiobook) collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new books from your favorite authors and will grab, sort and rename them.
+
+:::danger
+Readarr is in the early stages of development and is considered alpha.
+Please make sure to check in the [Readarr Discord](https://readarr.com/discord) about any issues you might face with the **application**.
+Anything else can go into the swizzin discord.
+Install and use with caution.
+:::
+
+## Initial Setup
+
+Installing Readarr is easy. Simply issue the following command:
+
+```bash main
+sudo box install readarr
+```
+
+This command will configure readarr for your user.
+
+## How to Access
+
+After Readarr has been installed, it will be available for access at `https://<hostname.ltd>/readarr`.
+
+If you don't use `nginx`, you can find it on port `8787`.
+
+## Service Management
+
+The Readarr service is managed by systemd and has been configured for single user usage. You can find the service file here:
+
+```
+/etc/systemd/system/readarr.service
+```
+
+import SystemdTabs from '../snippets/systemdtabs.mdx';
+
+<SystemdTabs service="readarr"/>
+
+## Configuration
+
+Out of the box, Readarr comes with no configuration. Following are some basic tasks to help get your client up and running:
+
+### Add a new book (and your first root directory)
+
+1. At the top, click Library.
+2. Click `Add New`
+3. Type the name, ibsn, or asin of the book or author's name that you want to add
+4. In Root Folder choose `Add a new path`. Enter the path for the folder you wish to add your Readarr books to.
+  - e.g. `/home/<username>/media/books`
+5. Change the other settings to your own needs
+6. Click the green `Add {book/author}` to add the book/author.
+
+### Connect download clients
+import Conn4Arrs from '../snippets/conn4arr.mdx';
+
+<Conn4Arrs />
+
+### Add an indexer with Jackett
+Readarr only supports a few trackers out of the box, but the indexers can be expanded by using the application [Jackett](jackett.mdx). To add an indexer with Jackett, use the following steps.
+
+:::note
+By default, when receiving the torznab feed from Jackett, it will need to be modified to be connected with the application. The default link looks like:
+
+```plaintext
+https://<yourhostname.ltd>/jackett/api/v2.0/indexers/yourtracker/results/torznab/
+```
+
+We need to edit this link to **remove https** and **add the port number**. Thus, if your port number was `12345`, your edited URL would look like this:
+
+```plaintext
+http://<yourhostname.ltd>:12345/jackett/api/v2.0/indexers/yourtracker/results/torznab/
+```
+:::
+
+1. Go to `Settings > Indexers` and click `+` to add a new indexer.
+2. Under `Torrent` choose `Torznab`
+3. Use the settings:
+```plaintext main
+Name: <tracker name>
+URL: <click copy torznab feed in jackett and modify as per above>
+API: <copy and paste from jackett UI>
+```
+4. Click `Test`. If all is good, click `Save`.
+
+### Other tasks
+
+You may wish to further alter your setup by setting quality profiles or setting up post-processing so that media is automatically transferred to your Readarr library when your torrents or usenet are completed. 
+If you need further help, you can refer to the [Readarr Wiki](https://wiki.servarr.com/Readarr) and [Readarr FAQ](https://wiki.servarr.com/Readarr_FAQ)/
+
+   
+If you are not running Readarr as your master user, you can set the environment variable `readarrOwner=<yourUser>`before the update, and the migration will respect the choice.
